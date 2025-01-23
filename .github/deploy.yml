@@ -1,0 +1,83 @@
+name: deploy
+ 
+# The `deploy` workflow takes the Helm manifest templates from the source repo according to the source commit id. 
+# It generates K8s manifests applying config values from the Config Git repo. 
+# It takes the config values from a branch corresponding to the current environment. 
+# Having manifests generated, it creates a PR to the GitOps repository on the processed environment/ring branch. 
+# The workflow updates the Git commit status specifying that the change has been promoted to the environment.
+ 
+
+on:
+  workflow_dispatch:
+    inputs:
+      commit_id:
+        required: true
+        type: string
+        description: 'Source commit_id (e.g. 62d1d965735a80afca35da9ec8d8aeb39db2da6c)'
+      environment:
+        required: false
+        default: dev
+        type: string
+        description: 'Environment to deploy to (e.g. d2)'
+      promotion:
+        required: false
+        type: string
+        default: y
+        description: 'If the change is a subject for the promotion (e.g. Y)'
+      version:
+        required: true
+        type: string
+        description: 'Version (e.g. 0.0.1-15)'
+
+
+jobs:
+  Deploy:
+      name: "Deploy"
+      runs-on: ubuntu-latest
+      permissions: write-all
+      environment: ${{ inputs.environment }}
+      steps:      
+
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ inputs.commit_id }}
+      
+      - name: Set Version
+        run: |
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+        env:
+          VERSION: ${{ inputs.version }} 
+      
+
+      - name: Generate Manifests
+        run: |
+          .github/workflows/utils/generate-manifests.sh "$PROJECTS_FILE" "$SNAPSHOT_FILE" "$ENVIRONMENT" "$HELM_PATH" "$MANIFESTS_PATH"
+        env:
+          PROJECTS_FILE: ${{ github.workspace }}/projects.yaml
+          SNAPSHOT_FILE: ${{ github.workspace }}/snapshot.yaml
+          HELM_PATH: ${{ github.workspace }}/helm
+          MANIFESTS_PATH: ${{ github.workspace }}/manifests
+          ENVIRONMENT: ${{ inputs.environment }}
+          VERSION: ${{ env.VERSION }}
+
+      - name: Create PR
+        run: |
+          promoted=$(if [ ${{ inputs.promotion }} == "y" ]; then echo "promoted"; fi)          
+          .github/workflows/utils/create-pr.sh -s "$MANIFESTS_PATH" -d . -r "$MANIFESTS_REPO" -b "$ACTIVE_ENVIRONMENT" -t "$TOKEN" -e "$ACTIVE_ENVIRONMENT" -m N -l $promoted
+        env:
+          PROMOTED_COMMIT_ID: ${{ inputs.commit_id }}
+          MANIFESTS_PATH: ${{ github.workspace }}/manifests
+          MANIFESTS_REPO: https://github.com/${{ github.event.repository.name }}
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ACTIVE_ENVIRONMENT: ${{ inputs.environment }}
+
+      - name: Update Commit Status
+        run: |
+            .github/workflows/utils/update-status.sh "pending" "Promoted $VERSION-sj-$IMAGE_TAG" "$ACTIVE_ENVIRONMENT"        
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PROMOTED_COMMIT_ID: ${{ inputs.commit_id }}
+          ACTIVE_ENVIRONMENT: ${{ inputs.environment }}          
+      
+

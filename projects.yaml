@@ -1,0 +1,9 @@
+projects:
+  plant-chat-api:
+    source: KraftHeinz-Org/plant-chat-api_CI-9232
+    config: KraftHeinz-Org/plant-chat-api-config-ci-9232
+    gitops: KraftHeinz-Org/plant-chat-api-gitops-ci-9232
+  plant-chat-ui:
+    source: KraftHeinz-Org/plant-chat_CI-9232 
+    config: KraftHeinz-Org/plant-chat-config-ci-9232
+    gitops: KraftHeinz-Org/plant-chat-gitops-ci-9232

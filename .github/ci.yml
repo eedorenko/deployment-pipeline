@@ -1,0 +1,31 @@
+name: ci
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+
+jobs: 
+
+  StartCD:
+    runs-on: ubuntu-latest    
+    permissions: write-all
+
+    steps:
+    - name: Checkout Source
+      uses: actions/checkout@v3
+    - name: Generate Version
+      run: |
+
+        VERSION=v-${{ vars.VERSION }}-${{ github.run_number }}
+        echo "VERSION=$VERSION" >> $GITHUB_ENV
+        
+    - name: Start CD
+      run: |
+        gh workflow run deploy.yml -f environment="$START_ENVIRONMENT" -f commit_id="$PROMOTED_COMMIT_ID" -f version="$VERSION"
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        PROMOTED_COMMIT_ID: ${{ github.sha }}
+        START_ENVIRONMENT: ${{ vars.START_ENVIRONMENT }}
+
