@@ -69,7 +69,7 @@ jobs:
         env:
           PROMOTED_COMMIT_ID: ${{ inputs.commit_id }}
           MANIFESTS_PATH: ${{ github.workspace }}/manifests
-          MANIFESTS_REPO: https://github.com/${{ github.event.repository.name }}
+          MANIFESTS_REPO: https://github.com/${{ github.repository }}
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ACTIVE_ENVIRONMENT: ${{ inputs.environment }}
 
