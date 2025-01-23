@@ -32,7 +32,7 @@ echo $GENERATED_MANIFESTS_FOLDER
 
 set -euo pipefail
 
-github_prefix=https://github.com/
+github_prefix=https://automated:$TOKEN@github.com
 values_file_name='values.yaml'
 gen_manifests_file_name='gen_manifests.yaml'
 

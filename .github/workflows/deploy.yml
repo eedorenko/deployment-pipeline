@@ -60,6 +60,7 @@ jobs:
           MANIFESTS_PATH: ${{ github.workspace }}/manifests
           ENVIRONMENT: ${{ inputs.environment }}
           VERSION: ${{ env.VERSION }}
+          TOKEN: ${{ secrets.CD_BOOTSTRAP_TOKEN }}
 
       - name: Create PR
         run: |
