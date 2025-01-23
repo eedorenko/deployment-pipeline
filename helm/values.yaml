@@ -1,5 +1,0 @@
-gitOpsInterval: 30s
-kustomizationInterval: 30s
-secretRef: repo-secret
-githubPrefix: https://github.com/
-namespace: flux-system

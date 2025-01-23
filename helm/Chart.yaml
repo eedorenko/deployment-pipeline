@@ -1,4 +1,0 @@
-apiVersion: v2
-name: deployment-pipeline
-version: 0.0.1
-description: Deploys a snapshot of the application to a Kubernetes cluster
