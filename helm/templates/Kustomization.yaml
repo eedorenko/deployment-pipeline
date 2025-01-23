@@ -4,6 +4,7 @@ metadata:
   name: {{ include "gitopsName" . }}
   namespace: {{ .Values.namespace }}
 spec:
+  targetNamespace: ${targetNamespace}
   interval: {{ .Values.kustomizationInterval }}
   sourceRef:
     kind: GitRepository
