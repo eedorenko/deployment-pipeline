@@ -69,7 +69,6 @@ cp -r $SOURCE_FOLDER/* $DEST_FOLDER/
 # Add tracking information
 mkdir -p .github/tracking
 echo "$PROMOTED_COMMIT_ID" > .github/tracking/Promoted_Commit_Id
-echo "$CONFIG_COMMIT_ID" > .github/tracking/Config_Commit_Id
 echo "$VERSION" > .github/tracking/Version
 
 git add -A
