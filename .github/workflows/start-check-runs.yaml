@@ -2,12 +2,14 @@ name: start-check-runs
 
 on:
   pull_request:
-    branches: ["*","!main"]
+    branches: 
+      - '*'
+      - '!main'
   workflow_dispatch:
 
 jobs: 
 
-  StartCD:
+  StartCheckRuns:
     runs-on: ubuntu-latest    
     permissions: write-all
 
