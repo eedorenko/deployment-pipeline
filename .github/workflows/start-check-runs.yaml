@@ -2,8 +2,6 @@ name: start-check-runs
 
 on:
   pull_request:
-    branches: 
-      - 'dev'
   workflow_dispatch:
 
 jobs: 
