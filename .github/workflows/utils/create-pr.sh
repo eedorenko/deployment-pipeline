@@ -86,7 +86,7 @@ if [[ `git status --porcelain | head -1` ]]; then
     #get last commit id
     commit_id=$(git rev-parse HEAD)
 
-    .$SCRIPT_FOLDER/start-check-run.sh $commit_id $repo_name
+    $SCRIPT_FOLDER/start-check-run.sh $commit_id $repo_name
 
     # In case the deploy branch already exists, merge it with the current changes
     echo "Pull the deploy branch $deploy_branch_name"
