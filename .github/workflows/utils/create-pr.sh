@@ -47,6 +47,10 @@ echo "Clone manifests repo"
 repo_url="${DEST_REPO#http://}"
 repo_url="${DEST_REPO#https://}"
 repo_url="https://automated:$TOKEN@$repo_url"
+repo_name="${DEST_REPO#https://github.com/}"
+
+
+
 
 echo "git clone $repo_url -b $DEST_BRANCH --depth 1 --single-branch"
 git clone $repo_url -b $DEST_BRANCH --depth 1 --single-branch
@@ -75,7 +79,12 @@ git add -A
 git status
 # If there are changes, commit them
 if [[ `git status --porcelain | head -1` ]]; then
-    git commit -m "deployment $VERSION"
+    git commit -m "deployment $VERSION"    
+
+    #get last commit id
+    commit_id=$(git rev-parse HEAD)
+
+    .github/workflows/utils/start-check-run.sh $commit_id $repo_name
 
     # In case the deploy branch already exists, merge it with the current changes
     echo "Pull the deploy branch $deploy_branch_name"
