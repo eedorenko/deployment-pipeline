@@ -91,8 +91,6 @@ if [[ `git status --porcelain | head -1` ]]; then
     #get last commit id
     commit_id=$(git rev-parse HEAD)
 
-    $SCRIPT_FOLDER/start-check-run.sh $commit_id $owner_repo
-
     # In case the deploy branch already exists, merge it with the current changes
     echo "Pull the deploy branch $deploy_branch_name"
     echo "git pull $repo_url $deploy_branch_name -s ours"
@@ -103,6 +101,7 @@ if [[ `git status --porcelain | head -1` ]]; then
     echo "Push to the deploy branch $deploy_branch_name"
     echo "git push --set-upstream $repo_url $deploy_branch_name"
     git push --set-upstream $repo_url $deploy_branch_name
+
 
     # Create a PR 
     echo "Create a PR to $DEST_BRANCH"
@@ -125,4 +124,5 @@ if [[ `git status --porcelain | head -1` ]]; then
         fi 
 
     fi
+    $SCRIPT_FOLDER/start-check-run.sh $commit_id $owner_repo    
 fi 
