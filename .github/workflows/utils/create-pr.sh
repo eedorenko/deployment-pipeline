@@ -44,13 +44,18 @@ pr_user_email="agent@gitops.com"
 git config --global user.email $pr_user_email
 git config --global user.name $pr_user_name
 
+
 # Clone manifests repo
 echo "Clone manifests repo"
 repo_url="${DEST_REPO#http://}"
 repo_url="${DEST_REPO#https://}"
 repo_url="https://automated:$TOKEN@$repo_url"
-repo_name="${DEST_REPO#https://github.com/}"
 
+owner_repo="${DEST_REPO#https://github.com/}"
+owner_repo="${owner_repo%.*}"
+
+export GITHUB_TOKEN=
+echo $TOKEN | gh auth login --with-token
 
 
 
@@ -86,7 +91,7 @@ if [[ `git status --porcelain | head -1` ]]; then
     #get last commit id
     commit_id=$(git rev-parse HEAD)
 
-    $SCRIPT_FOLDER/start-check-run.sh $commit_id $repo_name
+    $SCRIPT_FOLDER/start-check-run.sh $commit_id $owner_repo
 
     # In case the deploy branch already exists, merge it with the current changes
     echo "Pull the deploy branch $deploy_branch_name"
@@ -102,11 +107,6 @@ if [[ `git status --porcelain | head -1` ]]; then
     # Create a PR 
     echo "Create a PR to $DEST_BRANCH"
     
-    owner_repo="${DEST_REPO#https://github.com/}"
-    owner_repo="${owner_repo%.*}"
-    echo $owner_repo
-    export GITHUB_TOKEN=
-    echo $TOKEN | gh auth login --with-token
 
     if gh pr view $deploy_branch_name -R $owner_repo --json state | grep OPEN; then
         echo "PR already exists"
