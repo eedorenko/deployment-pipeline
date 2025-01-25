@@ -4,7 +4,7 @@
 # create-pr.sh -s SOURCE_FOLDER -d DEST_FOLDER -r DEST_REPO -b DEST_BRANCH  -t TOKEN -r ENV_NAME -m AUTO_MERGE -l LABEL
 
 # Example:
-# create-pr.sh -s "/manifests" -d "/functional-testing" -r "https://github.com/KraftHeinz-Org/pltfrm_eng-mfg-control-tower-gitop" -b "dev" -t "token" -r "dev" -m "N" -l "promoted"
+# create-pr.sh -s "/manifests" -d "/functional-testing" -r "https://github.com/microsoft/kalypso" -b "dev" -t "token" -r "dev" -m "N" -l "promoted"
 
 
 # Creates a PR from the SOURCE_FOLDER to the DEST_FOLDER in the DEST_REPO in the DEST_BRANCH. It also creates a label on the PR, if specified.
