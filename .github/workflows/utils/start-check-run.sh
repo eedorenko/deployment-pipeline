@@ -20,7 +20,7 @@ for project in $(yq eval '.snapshot | keys | .[]' $SNAPSHOT_FILE); do
         -H "X-GitHub-Api-Version: 2022-11-28" \
         -f name='Ensure version for '$project \
         -f 'output[title]=Ensure Version '$version' for '$project \
-        -f 'output[summary]='$version \
+        -f 'output[summary]='$project/$version \
         -f head_sha=$COMMIT_ID \
         -f status='in_progress' \
         /repos/$REPO/check-runs
