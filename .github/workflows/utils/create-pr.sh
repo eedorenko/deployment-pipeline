@@ -86,7 +86,7 @@ git add -A
 git status
 # If there are changes, commit them
 if [[ `git status --porcelain | head -1` ]]; then
-    git commit -m 'deployment $VERSION
+    git commit --cleanup=verbatim -m 'deployment $VERSION
     
     
     request-checks: true'    
