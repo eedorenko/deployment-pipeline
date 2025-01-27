@@ -22,7 +22,7 @@ jobs:
     - name: Checkout Source
       uses: actions/checkout@v3
       
-    - name: Complete Chec kRun
+    - name: Complete Check Run
       run: |
         .github/workflows/utils/complete-check-run.sh "$PROJECT_NAME" "$VERSION" "$REPO" 
       env:
