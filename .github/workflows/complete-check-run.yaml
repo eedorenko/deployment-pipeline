@@ -29,5 +29,6 @@ jobs:
         PROJECTS_NAME: ${{ inputs.project_name }}
         VERSION: ${{ inputs.version }}
         REPO: ${{ github.repository }}
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
  

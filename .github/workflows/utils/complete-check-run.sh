@@ -4,6 +4,10 @@ PROJECT=$1
 VERSION=$2
 REPO=$3
 
+gh api -X GET -H "Accept: application/vnd.github+json" \
+    -H "X-GitHub-Api-Version: 2022-11-28" \
+    /repos/$REPO/check-runs | jq -r '.check_runs[] | select(.status == "in_progress")'
+
 # get a list of active check runs and iterate over them
 gh api -X GET -H "Accept: application/vnd.github+json" \
     -H "X-GitHub-Api-Version: 2022-11-28" \
