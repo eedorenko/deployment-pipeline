@@ -72,6 +72,7 @@ jobs:
           MANIFESTS_REPO: https://github.com/${{ github.repository }}
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ACTIVE_ENVIRONMENT: ${{ inputs.environment }}
+          $SNAPSHOT_FILE: ${{ github.workspace }}/snapshot.yaml
 
       - name: Update Commit Status
         run: |
