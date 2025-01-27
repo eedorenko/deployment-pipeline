@@ -1,0 +1,33 @@
+name: complete-check-run
+
+on:
+  workflow_dispatch:
+    inputs:
+      project_name:
+        required: true
+        type: string
+        description: 'Project name (e.g. my-project)'
+      version:
+        required: true
+        type: string
+        description: 'Version (e.g. 0.0.1-15)'
+
+jobs: 
+
+  CompleteCheckRun:
+    runs-on: ubuntu-latest    
+    permissions: write-all
+
+    steps:
+    - name: Checkout Source
+      uses: actions/checkout@v3
+      
+    - name: Complete Chec kRun
+      run: |
+        .github/workflows/utils/complete-check-run.sh "$PROJECTS_NAME" "$VERSION" "$REPO" 
+      env:
+        PROJECTS_NAME: ${{ inputs.project_name }}
+        VERSION: ${{ inputs.version }}
+        REPO: ${{ github.repository }}
+
+ 
