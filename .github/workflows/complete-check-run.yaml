@@ -24,9 +24,9 @@ jobs:
       
     - name: Complete Chec kRun
       run: |
-        .github/workflows/utils/complete-check-run.sh "$PROJECTS_NAME" "$VERSION" "$REPO" 
+        .github/workflows/utils/complete-check-run.sh "$PROJECT_NAME" "$VERSION" "$REPO" 
       env:
-        PROJECTS_NAME: ${{ inputs.project_name }}
+        PROJECT_NAME: ${{ inputs.project_name }}
         VERSION: ${{ inputs.version }}
         REPO: ${{ github.repository }}
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
