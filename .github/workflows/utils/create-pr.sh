@@ -127,5 +127,5 @@ if [[ `git status --porcelain | head -1` ]]; then
         fi 
 
     fi
-    $SCRIPT_FOLDER/start-check-run.sh $commit_id $owner_repo    
+    $SCRIPT_FOLDER/start-check-run.sh $commit_id $owner_repo $SOURCE_FOLDER/../snapshot.yaml   
 fi 
