@@ -25,7 +25,7 @@ for project in $(yq eval '.snapshot | keys | .[]' $SNAPSHOT_FILE); do
         -f status='in_progress' \
         /repos/$REPO/check-runs
 
-    tag="$project:$version"
+    tag="$project/$version"
     git tag $tag $COMMIT_ID
     git push -f origin $tag
 
