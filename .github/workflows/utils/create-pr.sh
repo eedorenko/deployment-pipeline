@@ -86,10 +86,7 @@ git add -A
 git status
 # If there are changes, commit them
 if [[ `git status --porcelain | head -1` ]]; then
-    git commit --cleanup=verbatim -m 'deployment $VERSION
-    
-    
-    request-checks: true'    
+    git commit --cleanup=verbatim -m "deployment $VERSION"
 
     #get last commit id
     commit_id=$(git rev-parse HEAD)
