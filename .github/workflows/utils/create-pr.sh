@@ -86,7 +86,10 @@ git add -A
 git status
 # If there are changes, commit them
 if [[ `git status --porcelain | head -1` ]]; then
-    git commit -m "deployment $VERSION \n\nrequest-checks: true"    
+    git commit -m 'deployment $VERSION
+    
+    
+    request-checks: true'    
 
     #get last commit id
     commit_id=$(git rev-parse HEAD)
