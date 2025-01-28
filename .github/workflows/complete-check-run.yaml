@@ -34,7 +34,7 @@ jobs:
         VERSION: ${{ inputs.version }}
         REPO: ${{ github.repository }}
         PROJECT_REPO: ${{ inputs.project_gitops_repo }}
-        TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         REMOTE_TOKEN: ${{ secrets.CD_BOOTSTRAP_TOKEN }}
 
  
