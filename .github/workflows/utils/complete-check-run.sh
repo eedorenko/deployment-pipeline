@@ -12,7 +12,7 @@ echo $REPO
 echo $PROJECT_REPO
 
 
-git clone --depth 1  "https://automated:$REMOTE_TOKEN@github.com/$PROJECT_REPO" $VERSION project
+git clone --depth 1 -b $VERSION "https://automated:$REMOTE_TOKEN@github.com/$PROJECT_REPO" project
 
 
 if [ $? -ne 0 ]; then
