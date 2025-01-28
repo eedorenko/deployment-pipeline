@@ -39,10 +39,3 @@ gh api -X GET -H "Accept: application/vnd.github+json" \
     echo $check_run_id
 done
 
-# gh api -X GET -H "Accept: application/vnd.github+json" \
-#     -H "X-GitHub-Api-Version: 2022-11-28" \
-#     /repos/eedorenko/deployment-pipeline/commits/tags/plant-chat-ui/0.0.1-37/check-runs | jq -r '.check_runs[] | select(.output.summary == "plant-chat-api/0.0.1-71")'
-    
-    
-#      | jq -r '.check_runs[] | select(.status == "in_progress")'
-
