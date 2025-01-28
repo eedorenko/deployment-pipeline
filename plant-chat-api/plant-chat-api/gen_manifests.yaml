@@ -10,7 +10,7 @@ spec:
   interval: 30s
   url: https://github.com//KraftHeinz-Org/plant-chat-api-gitops-ci-9232
   ref:
-    semver: 0.0.1-62
+    semver: 0.0.1-84
   secretRef:
       name: repo-secret
 ---
