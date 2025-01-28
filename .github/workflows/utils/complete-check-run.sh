@@ -12,7 +12,7 @@ echo $REPO
 echo $PROJECT_REPO
 
 
-git pull --depth 1 --dry-run https://automated:$REMOTE_TOKEN@github.com/$PROJECT_REPO $VERSION
+git pull --depth 1 --dry-run "https://automated:$REMOTE_TOKEN@github.com/$PROJECT_REPO" $VERSION
 
 if [ $? -ne 0 ]; then
     echo "Tag $VERSION not found in $PROJECT_REPO"
