@@ -73,6 +73,7 @@ jobs:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ACTIVE_ENVIRONMENT: ${{ inputs.environment }}
           SNAPSHOT_FILE: ${{ github.workspace }}/snapshot.yaml
+          REMOTE_TOKEN: ${{ secrets.CD_BOOTSTRAP_TOKEN }}
 
       - name: Update Commit Status
         run: |

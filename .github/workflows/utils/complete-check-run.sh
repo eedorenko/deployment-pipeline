@@ -4,9 +4,20 @@ PROJECT=$1
 VERSION=$2
 REPO=$3
 
+PROJECT_REPO=$4
+
 echo $PROJECT
 echo $VERSION
 echo $REPO
+
+SCRIPT_FOLDER=$(dirname $(realpath $0))
+
+git pull --depth 1 --dry-run https://automated:$REMOTE_TOKEN@github.com/$PROJECT_REPO $VERSION
+
+if [ $? -ne 0 ]; then
+    echo "Tag $VERSION not found in $PROJECT_REPO"
+    exit
+fi
 
 set -eo pipefail  # fail on error
 
