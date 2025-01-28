@@ -11,18 +11,16 @@ echo $VERSION
 echo $REPO
 echo $PROJECT_REPO
 
-export GITHUB_TOKEN=
-echo $REMOTE_TOKEN | gh auth login --with-token
 
-gh auth status
-
-git pull --depth 1 --dry-run "https://automated:$REMOTE_TOKEN@github.com/$PROJECT_REPO" $VERSION
+git clone --depth 1  "https://automated:$REMOTE_TOKEN@github.com/$PROJECT_REPO" $VERSION project
 
 
 if [ $? -ne 0 ]; then
     echo "Tag $VERSION not found in $PROJECT_REPO"
     exit
 fi
+
+rm -r project
 
 set -eo pipefail  # fail on error
 
