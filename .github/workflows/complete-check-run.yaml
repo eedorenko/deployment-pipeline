@@ -28,7 +28,7 @@ jobs:
       
     - name: Complete Check Run
       run: |
-        .github/workflows/utils/complete-check-run.sh "$PROJECT_NAME" "$VERSION" "$REPO" "$PROJECT_REPO"
+        .github/workflows/utils/complete-check-run.sh "$PROJECT_NAME" "$VERSION" "$REPO" "$PROJECT_REPO"        
       env:
         PROJECT_NAME: ${{ inputs.project_name }}
         VERSION: ${{ inputs.version }}
