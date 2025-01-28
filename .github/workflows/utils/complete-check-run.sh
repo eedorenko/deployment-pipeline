@@ -11,6 +11,8 @@ echo $VERSION
 echo $REPO
 echo $PROJECT_REPO
 
+export GITHUB_TOKEN=
+echo $REMOTE_TOKEN | gh auth login --with-token
 
 git pull --depth 1 --dry-run "https://automated:$REMOTE_TOKEN@github.com/$PROJECT_REPO" $VERSION
 
