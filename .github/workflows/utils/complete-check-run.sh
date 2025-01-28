@@ -9,6 +9,7 @@ PROJECT_REPO=$4
 echo $PROJECT
 echo $VERSION
 echo $REPO
+echo $PROJECT_REPO
 
 
 git pull --depth 1 --dry-run https://automated:$REMOTE_TOKEN@github.com/$PROJECT_REPO $VERSION
