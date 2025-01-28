@@ -11,6 +11,10 @@ on:
         required: true
         type: string
         description: 'Version (e.g. 0.0.1-15)'
+      project_gitops_repo:
+        required: true
+        type: string
+        description: 'Gitops repository (e.g. My-Org/my-project-gitops-ci-9232)'  
 
 jobs: 
 
@@ -24,11 +28,12 @@ jobs:
       
     - name: Complete Check Run
       run: |
-        .github/workflows/utils/complete-check-run.sh "$PROJECT_NAME" "$VERSION" "$REPO" 
+        .github/workflows/utils/complete-check-run.sh "$PROJECT_NAME" "$VERSION" "$REPO" "$PROJECT_REPO"
       env:
         PROJECT_NAME: ${{ inputs.project_name }}
         VERSION: ${{ inputs.version }}
         REPO: ${{ github.repository }}
+        PROJECT_REPO: ${{ inputs.project_gitops_repo }}
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
  
