@@ -14,9 +14,7 @@ echo $PROJECT_REPO
 export GITHUB_TOKEN=
 echo $REMOTE_TOKEN | gh auth login --with-token
 
-if [ -z "$REMOTE_TOKEN" ]; then
-  git pull --depth 1 --dry-run "https://automated:$REMOTE_TOKEN@github.com/$PROJECT_REPO" $VERSION
-fi
+git pull --depth 1 "https://automated:$REMOTE_TOKEN@github.com/$PROJECT_REPO" $VERSION
 
 
 if [ $? -ne 0 ]; then
