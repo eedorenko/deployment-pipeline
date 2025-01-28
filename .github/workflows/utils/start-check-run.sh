@@ -9,6 +9,7 @@ REPO=$2
 #   plant-chat-api: 0.0.1-70
 #   plant-chat-ui: 0.0.1-36
 
+SCRIPT_FOLDER=$(dirname $(realpath $0))
 
 for project in $(yq eval '.snapshot | keys | .[]' $SNAPSHOT_FILE); do
     version=$(yq eval ".snapshot.$project" $SNAPSHOT_FILE)

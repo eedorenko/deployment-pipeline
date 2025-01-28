@@ -10,7 +10,6 @@ echo $PROJECT
 echo $VERSION
 echo $REPO
 
-SCRIPT_FOLDER=$(dirname $(realpath $0))
 
 git pull --depth 1 --dry-run https://automated:$REMOTE_TOKEN@github.com/$PROJECT_REPO $VERSION
 
